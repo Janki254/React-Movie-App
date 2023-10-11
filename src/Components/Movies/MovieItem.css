@@ -1,0 +1,166 @@
+.card {
+    width: 300px;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    -webkit-transition: box-shadow 0.5s;
+    transition: box-shadow 0.5s;
+}
+.card:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.306);
+}
+.card .card-image {
+    width: auto;
+    overflow: hidden;
+    background-size: cover;
+    border-radius: 3px;
+    background-color: #000;
+}
+
+.card .card-image img {
+    width: 100%;
+    display: block;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+    transition: opacity 0.5s, -webkit-transform 0.5s;
+    transition: opacity 0.5s, transform 0.5s;
+    transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+}
+.card:hover .card-image img {
+    opacity: 0.6;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+/* ============CARD HEADER=================== */
+.card-header {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 14px 24px;
+    background: #fff;
+    max-height: 100%;
+    overflow: auto;
+    /* transform: translateY(101%);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s ease-in; */
+}
+
+.card .card-header .card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    letter-spacing: 3px;
+    color: #1d263b;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 0px #32577f;
+}
+
+.card .card-header .fav {
+    margin-left: 1rem;
+    display: inline-block;
+}
+
+.card .card-header .ratings {
+    background-color: #cbced17a;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #1d263b;
+}
+
+.card .card-header .ratings span.green {
+    color: rgb(25, 170, 114);
+}
+.card .card-header .ratings span.orange {
+    color: orange;
+}
+.card .card-header .ratings span.red {
+    color: rgb(240, 54, 54);
+}
+
+.card .card-header .realease-date {
+    display: inline-block;
+    margin: 0;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    color: #ccc;
+    font-weight: 300;
+    display: none;
+}
+/* ========================================================================================== */
+.card .card-info {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 14px 24px;
+    background: #fff;
+    max-height: 100%;
+    overflow: auto;
+    transform: translateY(101%);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s ease-in;
+}
+.card:hover .card-info {
+    transform: translateY(0);
+}
+
+.card .card-info .card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    letter-spacing: 3px;
+    color: #1d263b;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 0px #32577f;
+}
+.card .card-info .fav {
+    margin-left: 1rem;
+    display: inline-block;
+}
+.card .card-info .realease-date {
+    display: inline-block;
+    margin: 0;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    color: #32577f;
+    font-weight: 300;
+}
+.card .card-info .overview {
+    line-height: 2;
+    font-size: 0.95rem;
+    color: rgba(21, 37, 54, 0.7);
+    /* display: none; */
+}
+/* =====================SCROLLBAR EFFECT================= */
+.card .card-info::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+}
+
+.card .card-info::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+}
+
+.card .card-info::-webkit-scrollbar-thumb {
+    background-color: #1d263b;
+    border: 2px solid #555555;
+}

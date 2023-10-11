@@ -1,0 +1,33 @@
+.searchBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: url('../../assets/images/searchbg.jpg');
+    background-size: cover;
+}
+
+.searchInput {
+    width: 0px;
+    height: 40px;
+    background-color: #eeeeee;
+    border: none;
+    padding: 0.8rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition: width 0.3s ease;
+    transform: translateX(30px);
+}
+.searchInput:focus {
+    outline: none;
+}
+.searchInput.active {
+    width: 500px;
+}
+
+/* @media (min-width: 768px) {
+    .seachInput {
+        min-width: 600px;
+    }
+} */

@@ -1,0 +1,23 @@
+/* .genresBg {
+    background: rgb(63, 234, 251);
+    background: radial-gradient(
+        circle,
+        rgba(63, 234, 251, 1) 0%,
+        rgba(129, 63, 251, 1) 90%
+    );
+} */
+.genres-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.genres {
+    width: 80rem;
+    padding: 0 0.2rem;
+    margin: 0 auto;
+    min-width: 20rem;
+    max-width: 80rem;
+    margin-left: 0;
+}

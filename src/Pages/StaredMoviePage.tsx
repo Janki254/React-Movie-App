@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { Box, Typography } from '@mui/material';
+import {Box, Typography} from '@mui/material';
 
-import MovieList from '../Components/Movies/MovieList';
+// import MovieList from '../Components/Movies/MovieList';
+import StaredMovieList from '../Components/Movies/StaredMovieList';
 
 const StaredMoviePage = () => {
     return (
@@ -12,7 +13,7 @@ const StaredMoviePage = () => {
                     Your Favorite Movies
                 </Typography>
                 <Box sx={{mt: 3}}>
-                    <MovieList />
+                    <StaredMovieList />
                 </Box>
             </div>
         </React.Fragment>

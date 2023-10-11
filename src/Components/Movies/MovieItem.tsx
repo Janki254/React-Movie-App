@@ -1,6 +1,6 @@
 import './MovieItem.css';
 
-import React, {useState} from 'react';
+import React from 'react';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -12,15 +12,10 @@ import {Movie} from '../../services/fetchMovieService';
 const MovieItem: React.FC<{
     movie_item: Movie;
     image_path: string;
-    addTofavourites?: (movie: Movie | undefined) => void;
+    favorites?: Movie[];
+    removeFromfavourites: (movie: Movie) => void;
+    addTofavourites?: (movie: Movie) => void;
 }> = (props) => {
-    const [isfavMovie, setIsfavMovie] = useState<boolean>(false);
-    const AddTofavMovie = (movie: Movie) => {
-        setIsfavMovie((prevFavMovie) => !prevFavMovie);
-        if (props.addTofavourites) {
-            props.addTofavourites(movie);
-        }
-    };
     // console.log(props.movie_item);
     let RateingColorClass;
     const getClassByRate = (vote: number) => {
@@ -55,20 +50,7 @@ const MovieItem: React.FC<{
                     />
                 </div>
                 <div className='card-header'>
-                    <h2 className='card-title'>
-                        {props.movie_item.title}
-                        <span className='fav'>
-                            <IconButton
-                                onClick={() => AddTofavMovie(props.movie_item)}
-                            >
-                                {!isfavMovie ? (
-                                    <FavoriteBorderIcon />
-                                ) : (
-                                    <FavoriteIcon />
-                                )}
-                            </IconButton>
-                        </span>
-                    </h2>
+                    <h2 className='card-title'>{props.movie_item.title}</h2>
                     <h3 className='ratings'>
                         <span
                             className={getClassByRate(
@@ -83,15 +65,26 @@ const MovieItem: React.FC<{
                     <h2 className='card-title'>
                         {props.movie_item.title}
                         <span className='fav'>
-                            <IconButton
-                                onClick={() => AddTofavMovie(props.movie_item)}
-                            >
-                                {!isfavMovie ? (
-                                    <FavoriteBorderIcon />
-                                ) : (
+                            {props.favorites?.includes(props.movie_item) ? (
+                                <IconButton
+                                    onClick={() =>
+                                        props.removeFromfavourites(
+                                            props.movie_item,
+                                        )
+                                    }
+                                >
                                     <FavoriteIcon />
-                                )}
-                            </IconButton>
+                                </IconButton>
+                            ) : (
+                                <IconButton
+                                    onClick={() =>
+                                        props.addTofavourites &&
+                                        props.addTofavourites(props.movie_item)
+                                    }
+                                >
+                                    <FavoriteBorderIcon />
+                                </IconButton>
+                            )}
                         </span>
                     </h2>
                     <h3 className='realease-date'>

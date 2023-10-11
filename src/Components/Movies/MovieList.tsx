@@ -1,7 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import {Typography} from '@mui/material';
-
 import {Genre} from '../../services/fetchGenresServices';
 import {getMovieRequest, Movie} from '../../services/fetchMovieService';
 import MovieItem from './MovieItem';
@@ -14,15 +12,6 @@ const MovieList: React.FC<{
 }> = (props) => {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [favMovies, setFavMovies] = useState<Movie[]>([]);
-
-    const addToFavMovieHandler = (movie: Movie | undefined) => {
-        const newFavouriteList = [...favMovies, movie];
-        if (movie) {
-            setFavMovies(newFavouriteList);
-        }
-    };
-
-    const apiCalled = useRef(false);
 
     useEffect(() => {
         // Define an async function and call it within useEffect
@@ -42,6 +31,52 @@ const MovieList: React.FC<{
         fetchMovies();
     }, [props.searchedTerm]);
 
+    const saveFavMovieToLocalStorage = (movieItems: Movie[]) => {
+        // const existingData = localStorage.getItem('react-movie-app-favorites');
+        const newData = [...movieItems]; // Create a new copy of the movie items array.
+        const uniqueMovies = [...new Set(newData)]; // Create a unique set of movies.
+        localStorage.setItem(
+            'react-movie-app-favorites',
+            JSON.stringify(uniqueMovies),
+        );
+    };
+
+    const addToFavMovieHandler = (movie: Movie) => {
+        const existingFavourites = localStorage.getItem(
+            'react-movie-app-favorites',
+        );
+        const existingFavouritesList: Movie[] = existingFavourites
+            ? JSON.parse(existingFavourites)
+            : [];
+
+        const newFavouriteList = [...existingFavouritesList, movie];
+        if (movie) {
+            if (!favMovies.includes(movie)) {
+                setFavMovies(newFavouriteList);
+            }
+            if (!existingFavouritesList.includes(movie)) {
+                saveFavMovieToLocalStorage(newFavouriteList);
+            }
+        }
+    };
+    const removeMovieFromLocalStorage = (moviesAfterRemoval: Movie) => {
+        localStorage.setItem(
+            'react-movie-app-favorites',
+            JSON.stringify(moviesAfterRemoval),
+        );
+    };
+
+    const removeFavMovieHandler = (movie: Movie) => {
+        const newFavouriteList = favMovies.filter(
+            (fav_movie) => fav_movie.id !== movie?.id,
+        );
+
+        setFavMovies(newFavouriteList);
+        removeMovieFromLocalStorage(newFavouriteList);
+    };
+
+    const apiCalled = useRef(false);
+
     const idsFromGenres = props.genres?.map((g) => g.id);
     console.log(idsFromGenres);
 
@@ -56,6 +91,9 @@ const MovieList: React.FC<{
             key={item.id + indx}
             movie_item={item}
             image_path={IMG_PATH}
+            addTofavourites={addToFavMovieHandler}
+            removeFromfavourites={removeFavMovieHandler}
+            favorites={favMovies}
         />
     ));
 
@@ -64,8 +102,22 @@ const MovieList: React.FC<{
             key={item.id + indx}
             movie_item={item}
             image_path={IMG_PATH}
-        />
+            addTofavourites={addToFavMovieHandler}
+            removeFromfavourites={removeFavMovieHandler}
+            favorites={favMovies}
+        ></MovieItem>
     ));
+
+    // const favoritmovieList = favMovies?.map((movie, indx) => (
+    //     <MovieItem
+    //         key={movie.id + indx}
+    //         movie_item={movie}
+    //         image_path={IMG_PATH}
+    //         removeFromfavourites={removeFavMovieHandler}
+    //         addTofavourites={addToFavMovieHandler}
+    //         favorites={favMovies}
+    //     />
+    // ));
 
     return (
         <React.Fragment>
@@ -73,17 +125,6 @@ const MovieList: React.FC<{
                 <div className='container'>
                     <div className='cards-container'>
                         {props.genres ? filteredMovies : allMovies}
-                    </div>
-                    <Typography variant='h3'>Your Favorite Movies</Typography>
-                    <div className='card-container'>
-                        {favMovies.map((movie, indx) => (
-                            <MovieItem
-                                key={movie.id + indx}
-                                movie_item={movie}
-                                image_path={IMG_PATH}
-                                addTofavourites={addToFavMovieHandler}
-                            />
-                        ))}
                     </div>
                 </div>
             </section>

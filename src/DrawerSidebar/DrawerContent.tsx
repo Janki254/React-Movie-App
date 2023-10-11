@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {
-	Box,
-	Divider,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemText,
-	Toolbar,
+    Box,
+    Divider,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    Toolbar,
 } from '@mui/material';
 
 const Nav_Links = [
@@ -20,7 +20,7 @@ const Nav_Links = [
         page_link: 'genre-filter',
     },
     {
-        title: 'Starred Movies',
+        title: 'Favourite Movies',
         page_link: 'stared-movies',
     },
 ];

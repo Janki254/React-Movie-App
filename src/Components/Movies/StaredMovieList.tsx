@@ -12,7 +12,7 @@ const StaredMovieList: React.FC = () => {
 
     useEffect(() => {
         const myFavMovies = JSON.parse(
-            localStorage.getItem('react-movie-app-favorites'),
+            localStorage.getItem('react-movie-app-favorites') || '[]',
         );
 
         setFavMovies(myFavMovies);
@@ -27,7 +27,7 @@ const StaredMovieList: React.FC = () => {
     //     );
     // };
 
-    const removeMovieFromLocalStorage = (moviesAfterRemoval: Movie) => {
+    const removeMovieFromLocalStorage = (moviesAfterRemoval: Movie[]) => {
         localStorage.setItem(
             'react-movie-app-favorites',
             JSON.stringify(moviesAfterRemoval),

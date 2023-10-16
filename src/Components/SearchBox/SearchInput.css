@@ -23,11 +23,11 @@
     outline: none;
 }
 .searchInput.active {
-    width: 500px;
+    width: 250px;
 }
 
-/* @media (min-width: 768px) {
-    .seachInput {
-        min-width: 600px;
+@media (min-width: 768px) {
+    .searchInput.active {
+        width: 600px;
     }
-} */
+}

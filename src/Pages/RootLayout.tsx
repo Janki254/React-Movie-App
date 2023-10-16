@@ -1,27 +1,29 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 
-import { Drawer } from '@mui/material';
+import {Backdrop, Drawer, useMediaQuery} from '@mui/material';
 
 import Navbar from '../Components/Navbar/Navbar';
 import DrawerContent from '../DrawerSidebar/DrawerContent';
 
 const drawerWidth = 240;
 const RootLayout = () => {
+    const isMobile = useMediaQuery('(max-width:600px)');
+
     const [mobileOpen, setMobileOpen] = React.useState(true);
 
     const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
+        if (isMobile) {
+            setMobileOpen(!mobileOpen);
+        }
     };
-    const customBackdropProps = {
-        invisible: true, // Set the backdrop to be invisible
-    };
+
     return (
         <React.Fragment>
             <Navbar onOpenSidebar={handleDrawerToggle} />
             <Drawer
                 variant='persistent'
-                open={mobileOpen}
+                open={!isMobile || mobileOpen}
                 onClose={handleDrawerToggle}
                 ModalProps={{
                     keepMounted: true, // Better open performance on mobile.
@@ -36,10 +38,14 @@ const RootLayout = () => {
                         backgroundColor: '#10141e',
                     },
                 }}
-                BackdropProps={customBackdropProps}
             >
                 <DrawerContent />
             </Drawer>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer - 1}}
+                open={isMobile && mobileOpen}
+                onClick={handleDrawerToggle}
+            ></Backdrop>
             <main>
                 <Outlet />
             </main>

@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import {Genre} from '../../services/fetchGenresServices';
-import {getMovieRequest, Movie} from '../../services/fetchMovieService';
+import { Genre } from '../../services/fetchGenresServices';
+import { getMovieRequest, Movie } from '../../services/fetchMovieService';
 import MovieItem from './MovieItem';
 
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280';
@@ -59,7 +59,7 @@ const MovieList: React.FC<{
             }
         }
     };
-    const removeMovieFromLocalStorage = (moviesAfterRemoval: Movie) => {
+    const removeMovieFromLocalStorage = (moviesAfterRemoval: Movie[]) => {
         localStorage.setItem(
             'react-movie-app-favorites',
             JSON.stringify(moviesAfterRemoval),
